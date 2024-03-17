@@ -7,12 +7,24 @@ export default {
     }
     // Otherwise, serve the static assets.
     // Without this, the Worker will error and no assets will be served.
-    const resp = env.ASSETS.fetch(request);
-    //return new Response("every page have this tips: <br/>" + resp.body);
+    const resp = await env.ASSETS.fetch(request);
+    if (resp.status !== 200) {
+      return resp;
+    }
     let body = await resp.text();
     body = "every page have this tips: <br/>" + body;
     return new Response(body, {
       status: resp.status,
     });
+    // let resp = await env.ASSETS.fetch(request);
+    // if (resp.status !== 200) {
+    //   return resp;
+    // }
+    //return new Response("every page have this tips: <br/>" + resp.body);
+    // let body = await resp.text();
+    // body = "every page have this tips: <br/>" + body;
+    // return new Response(body, {
+    //   status: resp.status,
+    // });
   },
 };
