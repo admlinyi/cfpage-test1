@@ -4,7 +4,7 @@ export default {
     if (resp.status !== 200) {
       return resp;
     }
-    let body = "test text whatever you want , it's this only";
+    let body = "test text whatever you want , it's this only: <br />" + resp.body;
 
     return new Response(body, {
       status: resp.status,
