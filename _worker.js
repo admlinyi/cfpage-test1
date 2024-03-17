@@ -9,10 +9,10 @@ export default {
     // Without this, the Worker will error and no assets will be served.
     const resp = env.ASSETS.fetch(request);
     //return new Response("every page have this tips: <br/>" + resp.body);
-    let body = "every page have this tips: <br/>" + (await resp.text());
+    let body = await resp.text();
+    body = "every page have this tips: <br/>" + body;
     return new Response(body, {
       status: resp.status,
-      headers: resp.headers,
     });
   },
 };
