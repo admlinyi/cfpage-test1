@@ -7,6 +7,12 @@ export default {
     }
     // Otherwise, serve the static assets.
     // Without this, the Worker will error and no assets will be served.
-    return env.ASSETS.fetch(request);
+    const resp = env.ASSETS.fetch(request);
+    //return new Response("every page have this tips: <br/>" + resp.body);
+    let body = "every page have this tips: <br/>" + (await resp.text());
+    return new Response(body, {
+      status: resp.status,
+      headers: resp.headers,
+    });
   },
 };
